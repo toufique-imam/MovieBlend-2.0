@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "PopularTV";
+}
+
+@model AllData
+@using Newtonsoft.Json
+<form method="post" asp-action="Search" defaultbutton="btnSubmit">
+    <div class="input-group md-form form-sm form-1 pl-0">
+        <div class="input-group-prepend">
+            <button class="input-group-prepend" id="btnSubmit" type="submit" style="background-color:transparent;visibility:hidden"></button>
+            <span class="input-group-text primary-color lighten-3" id="basic-text1">
+                <i class="fas fa-search text-white"
+                   aria-hidden="true"></i>
+            </span>
+        </div>
+        <input required asp-for="@Model.search_data" class="form-control my-0 py-1 text-white" type="text" placeholder="Search" aria-label="Search">
+    </div>
+</form>
+<div class="container inner_content">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">TV Results @Model.tVArray.results.Length</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="card-columns">
+                @foreach (var data in Model.tVArray.results)
+                {
+                    @if (data.adult == true) { continue; }
+
+                    <!-- Card Narrower -->
+                    <div class="card card-cascade narrower">
+                        <!-- Card image -->
+                        <div class="view view-cascade overlay">
+                            <img width="200" height="350" class="card-img-top" src=@data.poster_path alt=@data.name +"image" />
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <!-- Card content -->
+                        <div class="card-body card-body-cascade">
+
+                            <!-- Label -->
+                            <h5 class="pink-text pb-2 pt-1">
+                                <i class="far fa-thumbs-up"></i> @data.popularity
+                            </h5>
+                            <!-- Title -->
+                            <h4 class="font-weight-bold card-title">@data.name</h4>
+                            <!-- Text -->
+                            <p class="card-text">
+                                @if (data.overview.Length <= 120)
+                                {
+                                    @data.overview;
+                                }
+                                @if (data.overview.Length > 120)
+                                {
+                                    @data.overview.Substring(0, 120);
+                                }
+                            </p>
+                            <!-- Button -->
+                            <a class="btn btn-unique" onclick="location.href='@Url.Action("DetailsTV","Home",new { @data=JsonConvert.SerializeObject(data.id)})'"> Details <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <!-- Card footer -->
+                        <div class="card-footer text-muted text-center">
+                            @data.first_air_date
+                        </div>
+                    </div>
+                    <!-- Card Narrower -->
+
+                }
+            </div>
+        </div>
+    </div>
+    </div>
+

@@ -1,0 +1,73 @@
+﻿@model MovieBlend.Models.MovieData
+
+@{
+    ViewData["Title"] = Model.title;
+}
+@using Newtonsoft.Json
+@using Humanizer
+@using StmlParsing
+<style>
+    .propic {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        max-height: 500px;
+        width: auto;
+    }
+</style>
+
+<div class="card">
+    <!--Card image-->
+    <img class="card-img-top" src=@Model.backdrop_path alt="Card image cap">
+    <img class="propic" src="@Model.poster_path" />
+
+    <!--Card content-->
+    <div class="card-body">
+
+        <!-- Container -->
+        <div class="d-block d-md-flex">
+            <!-- Column -->
+            <div class="p-3 flex-1 xcard-body">
+                <p align="justify" class="text-info">
+                    <br />
+                    <br /><br />
+                    <br />
+                    <h2 class="pb-3 font-weight-bold">@Model.title</h2>
+                    <h5>Language: @Model.original_language</h5>
+                    <h5>Popularity : @Model.popularity</h5>
+                    <h5>Vote Avg: @Model.vote_average</h5>
+                    <h5>
+                        @foreach (var item in Model.genres)
+                        {
+                            @item.name
+                        }
+                    </h5>
+                </p>
+            </div>
+            <!-- Column -->
+            <div class="p-3 flex-1">
+                <h3 class="pb-3 font-weight-bold">Overview</h3>
+                <p align="justify">
+                    @Model.overview
+                </p>
+
+            </div>
+            <!-- Column -->
+            <div class="p-3 flex-1">
+
+                <h2 class="pb-3 font-weight-bold">Facts</h2>
+                <p align="justify">
+                    <h5>Status:@Model.status</h5>
+                    <h5>First Air Date: @Model.release_date</h5>
+                    <h5>Original Name: @Model.original_title</h5>
+                    <br />
+                    <button onclick="location.href='@Url.Action("MediaDisCussion", "Post", new { @data = JsonConvert.SerializeObject(Model.id+Model.title) })'" class="btn btn-elegant">Discussions</button>
+                </p>
+
+            </div>
+            <!-- Column -->
+
+        </div>
+        <!-- Container -->
+    </div>
+</div>

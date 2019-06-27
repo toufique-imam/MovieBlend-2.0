@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "Create A Discussion";
+}
+
+@model DiscussionModel
+
+<div class="align-self-md-auto">
+    <form method="post" asp-action="AddDiscussion">
+        <br />
+        <label asp-for=@Model.Title></label>
+        <input type="text" asp-for=@Model.Title class="form-control text-white" placeholder="Title.." required />
+        <label asp-for=@Model.Content></label>
+        <textarea asp-for=@Model.Content class="form-control" style="height: 300px;" placeholder="What would you like to write? Supports Raw HTML and BB Code" required></textarea><br />
+        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-fw fa-upload"></i>Post</button><br />
+    </form>
+</div>

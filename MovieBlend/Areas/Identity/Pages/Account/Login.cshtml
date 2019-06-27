@@ -1,0 +1,60 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<form id="account" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content form-elegant">
+            <!--Header-->
+            <div class="modal-header text-center">
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
+            </div>
+            <!--Body-->
+            <div class="modal-body mx-4">
+                <!--Body-->
+                <div class="md-form mb-5 form-group">
+                    <input type="text" class="form-control" asp-for="Input.username">
+                    <label asp-for="Input.username">User Name</label>
+                    <span asp-validation-for="Input.username" class="text-danger"></span>
+                </div>
+
+                <div class="md-form mb-5 form-group">
+                    <input asp-for="Input.Password" type="password" id="Form-pass1" class="form-control validate">
+                    <label asp-for="Input.Password" data-success="Looks Good" for="Form-pass1">Your password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        </label>
+                    </div>
+                </div>
+
+                <div class="text-center mb-3">
+                    <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Sign in</button>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer mx-5 pt-3 mb-1">
+                <p class="font-small grey-text d-flex justify-content-end">
+                    Not a member? <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="blue-text ml-1">
+                        Sign Up
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

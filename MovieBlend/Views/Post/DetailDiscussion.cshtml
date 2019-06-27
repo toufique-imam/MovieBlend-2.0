@@ -1,0 +1,123 @@
+﻿@model DiscussionModel
+@using Humanizer
+@using StmlParsing
+@using Newtonsoft.Json
+@{
+    ViewData["Title"] = Model.MovieName + " Discussion Page";
+}
+<style>
+    .user_name {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .comments-list .media {
+        border-bottom: 1px dotted #ccc;
+    }
+
+    h1 {
+        color: snow;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+
+    h3 {
+        text-align: center;
+        color: snow;
+        text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    }
+
+    .poster_name {
+        text-align: left;
+        color: darkred;
+        text-decoration: underline
+    }
+
+    section {
+        width: 100%;
+        float: left;
+    }
+
+    .banner-section {
+        background-image: url("https://static.pexels.com/photos/373912/pexels-photo-373912.jpeg");
+        background-size: cover;
+        height: 380px;
+        left: 0;
+        position: absolute;
+        top: inherit;
+        background-position: 0;
+    }
+
+    .post-title-block {
+        padding: 100px 0;
+    }
+
+        .post-title-block h1 {
+            color: #fff;
+            font-size: 85px;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .post-title-block li {
+            font-size: 20px;
+            color: #fff;
+        }
+
+    .image-block {
+        float: left;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .footer-link {
+        float: left;
+        width: 100%;
+        background: #222222;
+        text-align: center;
+        padding: 30px;
+    }
+
+        .footer-link a {
+            color: #A9FD00;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+    .div-post {
+        margin-top: 45px;
+    }
+
+    img {
+        all: inherit;
+        align-content: center;
+        height: 380px;
+    }
+</style>
+<div class="banner-section">
+    <section class="post-content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 post-title-block">
+                    <h1 class="text-center">@Model.Title</h1>
+                    <h3> @Model.Movie_name</h3>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-12 div-post">
+                    <p>
+                        <h6 class="poster_name">Posted By @Model.poster_name</h6>
+                       
+                        <br />@Html.Raw(@StmlParser.Parse(Model.Content))
+                    </p>
+                    @if (User.Identity.Name.ToString() == Model.poster_name)
+                    {
+
+                        <button class="btn btn-danger" onclick="location.href='@Url.Action("DeleteDiscussion", "Post", new { @data = JsonConvert.SerializeObject(Model.Id) })'"><i class="fa fa-fw fa-edit"></i>Delete</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="fb-comments" data-href="https://localhost:5001/PostDetail/@Model.Id" data-width="" data-numposts="10"></div>
+</div>
+
+
+
