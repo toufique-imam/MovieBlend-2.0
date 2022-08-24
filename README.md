@@ -2,8 +2,6 @@
 Search For Movies/Shows and Create Post and Discuss about Them <hr> 
 Webapp Development Project for CSE3100<br>
 
-# CSE3212 Compiler Design
-
 [Iftekher Toufique Imam](https://github.com/toufique-imam)
 ---
 
