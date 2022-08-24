@@ -6,8 +6,6 @@ Webapp Development Project for CSE3100<br>
 
 [Iftekher Toufique Imam](https://github.com/toufique-imam)
 ---
-Compiler Design Lab, KUET, BD
----
 
 [![GitHub Stars](https://img.shields.io/github/stars/toufique-imam/MovieBlend-2.0?style=social)](https://github.com/toufique-imam/MovieBlend-2.0)
 [![download](https://img.shields.io/github/downloads/toufique-imam/MovieBlend-2.0/total.svg)](https://github.com/toufique-imam/MovieBlend-2.0)
